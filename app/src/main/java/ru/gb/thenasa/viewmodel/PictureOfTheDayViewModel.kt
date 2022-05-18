@@ -1,11 +1,10 @@
 package ru.gb.thenasa.viewmodel
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.gb.thenasa.model.PictureOfTheDayState
 import ru.gb.thenasa.model.repo.NasaRepositoryImpl
