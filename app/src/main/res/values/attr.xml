@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="activityBackgroundColor" format="reference"/>
+    <attr name="actionBarBackgroundColor" format="reference"/>
+    <attr name="bottomNavigationBackgroundColor" format="reference"/>
+</resources>

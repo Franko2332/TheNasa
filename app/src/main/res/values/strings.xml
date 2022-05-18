@@ -3,4 +3,8 @@
     <string name="apod">APOD</string>
     <string name="favorites">Favorites</string>
     <string name="settings">Settings</string>
+    <string name="themes">Themes</string>
+    <string name="moon_theme">Moon theme</string>
+    <string name="default_theme">Default theme</string>
+    <string name="martian_theme">Martian theme</string>
 </resources>

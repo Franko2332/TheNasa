@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="moon_first">#13293A</color>
+    <color name="moon_second">#0E1C27</color>
+    <color name="martian_first">#CD933C</color>
+    <color name="martian_second">#FF9800</color>
+    <color name="default_first">#191818</color>
+    <color name="default_second">#322E2E</color>
+    <color name="default_app_bar">#1B1919</color>
 </resources>
