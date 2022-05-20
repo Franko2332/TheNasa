@@ -11,10 +11,11 @@ import ru.gb.thenasa.databinding.ActivityMainBinding
 import ru.gb.thenasa.model.Const
 import ru.gb.thenasa.view.callbacks.ChangeThemeCallback
 import ru.gb.thenasa.view.fragments.MainFragment
+import ru.gb.thenasa.view.fragments.PictureFromTheMarsFragment
 import ru.gb.thenasa.view.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity(),
-    NavigationBarView.OnItemSelectedListener, ChangeThemeCallback{
+    NavigationBarView.OnItemSelectedListener, ChangeThemeCallback {
     private val fragmentsMap: HashMap<String, Fragment> = HashMap()
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -28,12 +29,12 @@ class MainActivity : AppCompatActivity(),
     }
 
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.action_main -> setMainFragment()
             R.id.action_settings -> setSettingsFragment()
             R.id.action_favorites -> setFavoritesFragment()
+            R.id.action_mars -> setPictureFromTheMarsFragment()
         }
         return true
     }
@@ -41,15 +42,16 @@ class MainActivity : AppCompatActivity(),
     private fun init() {
         binding.bnv.setOnItemSelectedListener(this)
         fragmentsMap.apply {
-            put(Const.MAIN_FRAGMENT, MainFragment())
-            put(Const.SETTINGS_FRAGMENT, SettingsFragment())
+            put(Const.NasaAppFragmentsNames.MAIN_FRAGMENT, MainFragment())
+            put(Const.NasaAppFragmentsNames.SETTINGS_FRAGMENT, SettingsFragment())
+            put(Const.NasaAppFragmentsNames.MARTIAN_PICTURES_FRAGMENT, PictureFromTheMarsFragment())
         }
     }
 
     private fun setCustomTheme() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val themeId = sharedPreferences.getInt(Const.THEME_ID, Const.DEFAULT_THEME)
-        when (themeId){
+        when (themeId) {
             Const.DEFAULT_THEME -> setTheme(R.style.Theme_TheNasa)
             Const.MOON_THEME -> setTheme(R.style.Theme_TheNasa_Moon)
             Const.MARTIAN_THEME -> setTheme(R.style.Theme_TheNasa_Martian)
@@ -57,30 +59,50 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    private fun setFavoritesFragment(){
+    private fun setFavoritesFragment() {
 
     }
 
+
     private fun setSettingsFragment() {
-        fragmentsMap[Const.SETTINGS_FRAGMENT]?.let {
+        fragmentsMap[Const.NasaAppFragmentsNames.SETTINGS_FRAGMENT]?.let {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_holder, it, Const.SETTINGS_FRAGMENT)
-                .addToBackStack(null)
+                .replace(R.id.fragment_holder, it, Const.NasaAppFragmentsNames.SETTINGS_FRAGMENT)
+                .addToBackStack(Const.NasaAppFragmentsNames.SETTINGS_FRAGMENT)
                 .commit()
         }
     }
 
     private fun setMainFragment() {
-        fragmentsMap[Const.MAIN_FRAGMENT]?.let {
+        fragmentsMap[Const.NasaAppFragmentsNames.MAIN_FRAGMENT]?.let {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_holder, it, Const.MAIN_FRAGMENT)
-                .addToBackStack(null)
+                .replace(R.id.fragment_holder, it, Const.NasaAppFragmentsNames.MAIN_FRAGMENT)
+                .addToBackStack(Const.NasaAppFragmentsNames.MAIN_FRAGMENT)
                 .commit()
         }
     }
 
+    private fun setPictureFromTheMarsFragment() {
+        fragmentsMap[Const.NasaAppFragmentsNames.MARTIAN_PICTURES_FRAGMENT]?.let {
+            if(!it.isVisible){
+                supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_holder,
+                        it,
+                        Const.NasaAppFragmentsNames.MARTIAN_PICTURES_FRAGMENT
+                    )
+                    .addToBackStack(Const.NasaAppFragmentsNames.MARTIAN_PICTURES_FRAGMENT)
+                    .commit()
+            }
+        }
+    }
+
+
     override fun changeTheme() {
         recreate()
     }
+
+
+
 
 }

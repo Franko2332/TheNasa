@@ -3,6 +3,7 @@
     package="ru.gb.thenasa">
 <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_nasa"
         android:label="@string/app_name"
