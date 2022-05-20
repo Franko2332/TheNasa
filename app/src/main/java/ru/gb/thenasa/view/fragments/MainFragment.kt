@@ -1,20 +1,19 @@
 package ru.gb.thenasa.view.fragments
 
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
-import coil.api.load
-import com.squareup.picasso.Picasso
-import ru.gb.thenasa.R
 import ru.gb.thenasa.databinding.FragmentApodBinding
-import ru.gb.thenasa.model.PictureOfTheDayState
-import ru.gb.thenasa.model.pojo.ResultPictureOfTheDay
+import ru.gb.thenasa.view.adapters.ViewPagerApodAdapter
 import ru.gb.thenasa.viewmodel.PictureOfTheDayViewModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.ArrayList
 
 class MainFragment: Fragment() {
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -33,36 +32,17 @@ class MainFragment: Fragment() {
         return _binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewLifecycleOwner.lifecycle.coroutineScope.launchWhenStarted {
-            viewModel.getPictureOfTheDay()
-            viewModel.uiState.collect{uiState ->
-                when(uiState){
-                    is PictureOfTheDayState.Loading -> UiLoadingState()
-
-                    is PictureOfTheDayState.Success -> UiSuccessState(uiState.resultUrl, uiState.explanation)
-
-                    is PictureOfTheDayState.Error -> UiErrorState()
-                }
-            }
+        val date = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val items = ArrayList<String>()
+        for (i in 0..100) {
+            items.add(formatter.format(date.minusDays(i.toLong())))
         }
-    }
-
-    private fun UiLoadingState() {
-        _binding.progressBar.visibility = View.VISIBLE
-    }
-
-    private fun UiSuccessState(resultUrl: String?, explanation: String?) {
-
-        _binding.progressBar.visibility = View.GONE
-        Picasso.get().load(resultUrl)
-            .placeholder(R.drawable.ic_download_placeholder)
-            .error(R.drawable.ic_error_placeholder)
-            .into(_binding.imageViewAPOD)
-        _binding.textViewApodDescription.text = explanation
-    }
-
-    private fun UiErrorState() {
-        Log.e("error", "error")
+        val adapter = ViewPagerApodAdapter(this).apply {
+            setItems(items)
+            _binding.viewPagerApod.adapter = this
+        }
     }
 }

@@ -1,6 +1,4 @@
-package ru.gb.thenasa.model
-
-import ru.gb.thenasa.model.pojo.ResultPictureOfTheDay
+package ru.gb.thenasa.model.appstates
 
 sealed class PictureOfTheDayState {
     data class Success(val resultUrl: String?, val explanation: String?) : PictureOfTheDayState()

@@ -2,6 +2,9 @@
     <item android:id="@+id/action_main"
         android:title="@string/apod"
         android:icon="@drawable/ic_baseline_home_24"/>
+    <item android:id="@+id/action_mars"
+        android:title="@string/mars_pics"
+        android:icon="@drawable/ic_mars"/>
     <item android:id="@+id/action_favorites"
         android:title="@string/favorites"
         android:icon="@drawable/ic_favorites_24"/>
