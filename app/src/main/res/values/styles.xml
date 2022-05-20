@@ -9,4 +9,14 @@
         <item name="android:layout_marginStart">@dimen/default_margin</item>
         <item name="android:layout_marginEnd">@dimen/default_margin</item>
     </style>
+    <style name="settings_title_style">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:layout_marginStart">@dimen/default_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="action_bar_style" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="title">@string/app_name</item>
+        <item name="android:layout_marginBottom">@dimen/app_bar_margin_bottom</item>
+    </style>
 </resources>
