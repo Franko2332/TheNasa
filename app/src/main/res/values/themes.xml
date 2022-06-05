@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.TheNasa" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowActivityTransitions">true</item>
         <item name="activityBackgroundColor">@color/default_first</item>
         <item name="actionBarBackgroundColor">@color/default_app_bar</item>
         <item name="bottomNavigationBackgroundColor">@color/default_second</item>
@@ -19,6 +20,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.TheNasa.Moon" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowActivityTransitions">true</item>
         <item name="activityBackgroundColor">@color/moon_first</item>
         <item name="actionBarBackgroundColor">@color/moon_second</item>
         <item name="bottomNavigationBackgroundColor">@color/moon_second</item>
@@ -38,6 +40,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.TheNasa.Martian" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowActivityTransitions">true</item>
         <item name="colorSurface">@color/black</item>
         <item name="activityBackgroundColor">@color/martian_first</item>
         <item name="actionBarBackgroundColor">@color/martian_second</item>

@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/motion_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginStart="@dimen/default_margin"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    app:layoutDescription="@xml/fragment_settings_scene">
+
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/settings_theme_text_view"
         style="@style/settings_title_style"
-        android:text="@string/themes" />
+        android:text="@string/themes"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RadioGroup
         android:id="@+id/themes_radio_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/settings_theme_text_view">
+
         <RadioButton
             android:id="@+id/radio_button_default_theme"
-            android:text="@string/default_theme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/default_theme" />
+
         <RadioButton
             android:id="@+id/radio_button_moon_theme"
-            android:text="@string/moon_theme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/moon_theme" />
+
         <RadioButton
             android:id="@+id/radio_button_martian_theme"
-            android:text="@string/martian_theme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/martian_theme" />
     </RadioGroup>
-</LinearLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

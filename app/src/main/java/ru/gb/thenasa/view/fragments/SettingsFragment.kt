@@ -48,6 +48,7 @@ class SettingsFragment : Fragment() {
         _binding.radioButtonMartianTheme.setOnClickListener {
             setMartianTheme()
         }
+        _binding.motionContainer.transitionToEnd()
     }
 
     private fun setDefualtTheme() {

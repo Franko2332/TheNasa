@@ -13,8 +13,8 @@
         <entry key="app/src/main/res/drawable/ic_mars.xml" value="0.118" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_apod.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_martian_picture.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout/fragment_martian_picture.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_view_pager_apod.xml" value="0.1765625" />
         <entry key="app/src/main/res/menu/bottom_navigation_items.xml" value="0.1765625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_nasa.xml" value="0.1" />
