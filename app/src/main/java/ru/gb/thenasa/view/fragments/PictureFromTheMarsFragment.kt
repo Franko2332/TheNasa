@@ -1,6 +1,8 @@
 package ru.gb.thenasa.view.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +15,10 @@ import ru.gb.thenasa.databinding.FragmentMartianPictureBinding
 import ru.gb.thenasa.model.appstates.PictureFromTheMarsState
 import ru.gb.thenasa.model.pojo.ResultPicturesFromTheMars
 import ru.gb.thenasa.viewmodel.PictureFromTheMarsViewModel
+import kotlin.random.Random
 
 class PictureFromTheMarsFragment : Fragment() {
+    private val PIC_DATE = "Picture date"
     private val viewModel: PictureFromTheMarsViewModel by lazy {
         ViewModelProvider(this)[PictureFromTheMarsViewModel::class.java]
     }
@@ -48,11 +52,16 @@ class PictureFromTheMarsFragment : Fragment() {
         error.printStackTrace()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun uiSuccessState(resultPictures: ResultPicturesFromTheMars) {
         binding.martianFragmentProgressBar.visibility = View.GONE
-        Picasso.get().load(resultPictures.result!!.get(0).imageUrl)
-            .error(R.drawable.ic_error_placeholder)
-            .into(binding.imgMartianPic)
+        resultPictures.result!!.get(Random.nextInt(0, 835)).apply {
+            binding.martianFragmentDateTextView.text = PIC_DATE+date
+            Picasso.get().load(imageUrl)
+                .error(R.drawable.ic_error_placeholder)
+                .into(binding.imgMartianPic)
+        }
+
     }
 
     private fun uiLoadingState() {

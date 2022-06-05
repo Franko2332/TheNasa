@@ -5,5 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class ConcretePictureFromMars(
     @SerializedName("id") val id: Int?,
     @SerializedName("sol") val sol: Int?,
-    @SerializedName("img_src") val imageUrl: String?
+    @SerializedName("img_src") val imageUrl: String?,
+    @SerializedName("earth_date") val date: String?
 )
