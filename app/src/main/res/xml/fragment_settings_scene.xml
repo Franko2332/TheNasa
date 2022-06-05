@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<MotionScene
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
     <Transition
-        motion:constraintSetStart="@id/start"
+        motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
         motion:duration="3000">
-       <KeyFrameSet>
-       </KeyFrameSet>
+        <KeyFrameSet></KeyFrameSet>
     </Transition>
     <Transition
-        motion:autoTransition="animateToEnd"
-        motion:constraintSetStart="@id/end"
         motion:constraintSetEnd="@+id/start"
+        motion:constraintSetStart="@id/end"
         motion:duration="3000">
-        <KeyFrameSet>
-        </KeyFrameSet>
+        <KeyFrameSet></KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
