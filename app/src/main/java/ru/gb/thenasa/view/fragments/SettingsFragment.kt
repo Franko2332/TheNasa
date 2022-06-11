@@ -1,11 +1,14 @@
 package ru.gb.thenasa.view.fragments
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.gb.thenasa.R
 import ru.gb.thenasa.databinding.FragmentSettingsBinding
 import ru.gb.thenasa.model.Const
@@ -33,6 +36,15 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab).apply {
+            setOnClickListener(object : View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    Log.e("animate", "anim")
+                    ObjectAnimator.ofFloat(_binding.imgSettings, "rotation", 90f).start()
+                }
+
+            })
+        }
         when (PreferenceManager.getDefaultSharedPreferences(requireActivity())
             .getInt(Const.THEME_ID, Const.DEFAULT_THEME)) {
             Const.DEFAULT_THEME -> _binding.themesRadioGroup.check(R.id.radio_button_default_theme)

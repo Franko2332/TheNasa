@@ -9,4 +9,5 @@
     <string name="martian_theme">Martian theme</string>
     <string name="mars_pics">Mars Pics</string>
     <string name="jpg">jpg</string>
+    <string name="apod_description">APOD description</string>
 </resources>

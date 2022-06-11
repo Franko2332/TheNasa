@@ -24,7 +24,7 @@
                     android:indeterminate="true"
                     android:visibility="gone"
                     tools:visibility="visible" />
-                <ImageView
+                <com.github.chrisbanes.photoview.PhotoView
                     app:layout_collapseMode="parallax"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="centerCrop"
@@ -33,15 +33,39 @@
                     android:layout_height="wrap_content" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <androidx.core.widget.NestedScrollView
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        style="@style/apod_nested_scroll_view_style"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/vp_text_view_apod_description"
-            style="@style/apod_description_style"
-            android:layout_marginBottom="100dp"/>
-    </androidx.core.widget.NestedScrollView>
+        <androidx.core.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/vp_nested_scroll_view"
+            style="@style/apod_nested_scroll_view_style"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/apod_description_constraint"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp">
+                <TextView
+                    android:id="@+id/apod_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="@dimen/title_text_size"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apod_description"
+                    />
+                <TextView
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    android:id="@+id/vp_text_view_apod_description"
+                    android:layout_width="wrap_content"
+                    style="@style/apod_description_style" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
