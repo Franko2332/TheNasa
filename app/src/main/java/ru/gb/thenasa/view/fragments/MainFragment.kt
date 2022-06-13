@@ -1,17 +1,24 @@
 package ru.gb.thenasa.view.fragments
 
+import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import ru.gb.thenasa.R
 import ru.gb.thenasa.databinding.FragmentApodBinding
 import ru.gb.thenasa.view.adapters.ViewPagerApodAdapter
 import ru.gb.thenasa.viewmodel.PictureOfTheDayViewModel
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 
@@ -34,7 +41,7 @@ class MainFragment: Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val date = LocalDateTime.now()
+        val date = LocalDateTime.now(ZoneId.of("America/New_York"))
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val items = ArrayList<String>()
         for (i in 0..100) {

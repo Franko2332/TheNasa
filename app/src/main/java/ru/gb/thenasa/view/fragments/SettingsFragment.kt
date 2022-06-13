@@ -1,11 +1,14 @@
 package ru.gb.thenasa.view.fragments
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.gb.thenasa.R
 import ru.gb.thenasa.databinding.FragmentSettingsBinding
 import ru.gb.thenasa.model.Const

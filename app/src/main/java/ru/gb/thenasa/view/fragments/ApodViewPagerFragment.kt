@@ -5,9 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnticipateOvershootInterpolator
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.coroutineScope
+import androidx.transition.*
 import com.squareup.picasso.Picasso
 import ru.gb.thenasa.R
 import ru.gb.thenasa.databinding.ItemViewPagerApodBinding
@@ -16,6 +21,7 @@ import ru.gb.thenasa.model.appstates.PictureOfTheDayState
 import ru.gb.thenasa.viewmodel.PictureOfTheDayViewModel
 
 class ApodViewPagerFragment : Fragment() {
+    private var isExpanded = true
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this)[PictureOfTheDayViewModel::class.java]
     }
@@ -39,9 +45,13 @@ class ApodViewPagerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.apodTitle.setOnClickListener {
+            if (isExpanded) showApodDescription() else
+                hideApodDescription()
+        }
         viewLifecycleOwner.lifecycle.coroutineScope.launchWhenStarted {
             arguments?.let { arg ->
-                    viewModel.getPictureOfTheDayWithDate(arg.getString(Const.DATE)!!)
+                viewModel.getPictureOfTheDayWithDate(arg.getString(Const.DATE)!!)
             }
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
@@ -58,6 +68,48 @@ class ApodViewPagerFragment : Fragment() {
         }
     }
 
+    private fun showApodDescription() {
+        isExpanded = isExpanded.not()
+        val viewGroup = binding.vpNestedScrollView
+        val set = TransitionSet().apply {
+            addTransition(ChangeBounds())
+            addTransition(Fade())
+            duration = 2000
+            interpolator = AnticipateOvershootInterpolator(1.0f)
+        }
+        TransitionManager.beginDelayedTransition(viewGroup, set)
+        val constraintLayout: ConstraintLayout = binding.apodDescriptionConstraint
+        ConstraintSet().apply {
+            clone(constraintLayout)
+            connect(
+                R.id.vp_text_view_apod_description, ConstraintSet.TOP,
+                R.id.apod_title, ConstraintSet.BOTTOM
+            )
+            applyTo(constraintLayout)
+        }
+    }
+
+    private fun hideApodDescription() {
+        isExpanded = isExpanded.not()
+        val viewGroup = binding.vpNestedScrollView
+        val constraintLayout: ConstraintLayout = binding.apodDescriptionConstraint
+        val set = TransitionSet().apply {
+            addTransition(ChangeBounds())
+            addTransition(Fade())
+            duration = 2000
+            interpolator = AnticipateOvershootInterpolator(1.0f)
+        }
+        TransitionManager.beginDelayedTransition(viewGroup, set)
+        ConstraintSet().apply {
+            clone(constraintLayout)
+            connect(
+                R.id.vp_text_view_apod_description, ConstraintSet.TOP,
+                R.id.apod_description_constraint, ConstraintSet.BOTTOM
+            )
+            applyTo(constraintLayout)
+        }
+    }
+
     private fun UiErrorState() {
         Log.e("error", "error")
     }
@@ -68,6 +120,7 @@ class ApodViewPagerFragment : Fragment() {
             .placeholder(R.drawable.ic_download_placeholder)
             .error(R.drawable.ic_error_placeholder)
             .into(binding.vpImageViewAPOD)
+        val tv = requireActivity().findViewById<TextView>(R.id.vp_text_view_apod_description)
         binding.vpTextViewApodDescription.text = explanation
 
     }
