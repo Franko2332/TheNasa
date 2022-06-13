@@ -79,7 +79,7 @@ class ApodViewPagerFragment : Fragment() {
         }
         TransitionManager.beginDelayedTransition(viewGroup, set)
         val constraintLayout: ConstraintLayout = binding.apodDescriptionConstraint
-        val constraintSet = ConstraintSet().apply {
+        ConstraintSet().apply {
             clone(constraintLayout)
             connect(
                 R.id.vp_text_view_apod_description, ConstraintSet.TOP,
