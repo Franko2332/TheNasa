@@ -3,19 +3,23 @@ package ru.gb.thenasa.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationBarView
 import ru.gb.thenasa.R
 import ru.gb.thenasa.databinding.ActivityMainBinding
 import ru.gb.thenasa.model.Const
+import ru.gb.thenasa.view.adapters.ToDoNotesAdapter
 import ru.gb.thenasa.view.callbacks.ChangeThemeCallback
-import ru.gb.thenasa.view.fragments.MainFragment
-import ru.gb.thenasa.view.fragments.PictureFromTheMarsFragment
-import ru.gb.thenasa.view.fragments.SettingsFragment
+import ru.gb.thenasa.view.callbacks.CloseEditNoteCallback
+import ru.gb.thenasa.view.callbacks.SetEditNoteFragmentCallback
+import ru.gb.thenasa.view.fragments.*
 
 class MainActivity : AppCompatActivity(),
-    NavigationBarView.OnItemSelectedListener, ChangeThemeCallback {
+    NavigationBarView.OnItemSelectedListener, ChangeThemeCallback, SetEditNoteFragmentCallback, CloseEditNoteCallback{
+
     private val fragmentsMap: HashMap<String, Fragment> = HashMap()
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -40,12 +44,31 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun init() {
+        val toolbar: MaterialToolbar = findViewById(R.id.material_toolbar)
+        setSupportActionBar(toolbar)
+        toolbar.showOverflowMenu()
+
         binding.bnv.setOnItemSelectedListener(this)
         fragmentsMap.apply {
             put(Const.NasaAppFragmentsNames.MAIN_FRAGMENT, MainFragment())
             put(Const.NasaAppFragmentsNames.SETTINGS_FRAGMENT, SettingsFragment())
             put(Const.NasaAppFragmentsNames.MARTIAN_PICTURES_FRAGMENT, PictureFromTheMarsFragment())
+            put(Const.NasaAppFragmentsNames.TO_DO_NOTES_FRAGMENT, ToDoNotesFragment())
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu_items, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_notes ->{
+                setNotesFragment()
+            }
+        }
+        return true
     }
 
     private fun setCustomTheme() {
@@ -59,8 +82,23 @@ class MainActivity : AppCompatActivity(),
 
     }
 
+
+
     private fun setFavoritesFragment() {
 
+    }
+
+    override fun closeEditNoteFragment() {
+        onBackPressed()
+    }
+
+    private fun setNotesFragment() {
+        fragmentsMap[Const.NasaAppFragmentsNames.TO_DO_NOTES_FRAGMENT]?.let {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_holder, it, Const.NasaAppFragmentsNames.TO_DO_NOTES_FRAGMENT)
+                .addToBackStack(Const.NasaAppFragmentsNames.TO_DO_NOTES_FRAGMENT)
+                .commit()
+        }
     }
 
 
@@ -102,7 +140,18 @@ class MainActivity : AppCompatActivity(),
         recreate()
     }
 
+    override fun setEditNoteFragment(noteID: Int) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_holder,
+            EditNoteFragment.getInstance(noteID), null)
+            .addToBackStack(null)
+            .commit()
+    }
 
-
+    override fun setEditNoteFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_holder,
+            EditNoteFragment(), null)
+            .addToBackStack(null)
+            .commit()
+    }
 
 }

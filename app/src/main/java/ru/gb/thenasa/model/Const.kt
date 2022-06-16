@@ -12,6 +12,7 @@ class Const {
     }
 
     object NasaAppFragmentsNames{
+        const val TO_DO_NOTES_FRAGMENT = "TO_DO_NOTES_FRAGMENT"
         const val MAIN_FRAGMENT = "MAIN_FRAGMENT"
         const val SETTINGS_FRAGMENT = "SETTINGS_FRAGMENT"
         const val MARTIAN_PICTURES_FRAGMENT = "MARTIAN_PICTURES_FRAGMENT"
