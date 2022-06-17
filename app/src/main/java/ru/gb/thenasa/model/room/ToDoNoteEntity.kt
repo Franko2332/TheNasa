@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class ToDoNoteEntity(@PrimaryKey(autoGenerate = true)
-                          val id: Int?,
+data class ToDoNoteEntity(@PrimaryKey
+                          val id: Int,
                           val title: String?,
                           val description: String?,
                           val date: String
-                          )
+)
