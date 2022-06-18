@@ -11,10 +11,10 @@ import ru.gb.thenasa.viewmodel.itemviewmodel.ItemViewModel
 
 class ToDoNotesViewModel : ViewModel() {
     private var dataBase = App.getMovieDatabase()
-    private val data: MutableLiveData<List<ItemViewModel>> = MutableLiveData()
+    private val data: MutableLiveData<MutableList<ItemViewModel>> = MutableLiveData()
     private val noteData: MutableLiveData<ToDoNoteEntity> = MutableLiveData()
 
-    fun getData(): MutableLiveData<List<ItemViewModel>> {
+    fun getData(): MutableLiveData<MutableList<ItemViewModel>> {
         val notesViewData = mutableListOf<ItemViewModel>()
 
         dataBase.NasaToDoNoteDao().allToDoNotes().forEach {

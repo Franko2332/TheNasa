@@ -12,7 +12,7 @@ import ru.gb.thenasa.viewmodel.itemviewmodel.ItemViewModel
 
 
 class ToDoNotesAdapter: RecyclerView.Adapter<ToDoNotesAdapter.NotesViewHolder>() {
-    private var itemViewModelData: List<ItemViewModel> = emptyList()
+    private var itemViewModelData: MutableList<ItemViewModel> = mutableListOf()
     private var onItemClickListener: OnItemClickListener? = null
     private val viewTypeToLayoutId: MutableMap<Int, Int> = mutableMapOf()
 
@@ -20,7 +20,7 @@ class ToDoNotesAdapter: RecyclerView.Adapter<ToDoNotesAdapter.NotesViewHolder>()
         onItemClickListener = _onItemClickListener
     }
 
-    fun setData(items: List<ItemViewModel>){
+    fun setData(items: MutableList<ItemViewModel>){
         itemViewModelData = items
     }
 
@@ -46,6 +46,11 @@ class ToDoNotesAdapter: RecyclerView.Adapter<ToDoNotesAdapter.NotesViewHolder>()
         return item.viewType
     }
 
+    fun itemRemoved(pos: Int) {
+        itemViewModelData.removeAt(pos)
+        notifyItemRemoved(pos)
+    }
+
     class NotesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val cardView: CardView = itemView.findViewById(R.id.note_card_view)
         val noteTitle: TextView = itemView.findViewById(R.id.note_title)
@@ -55,6 +60,7 @@ class ToDoNotesAdapter: RecyclerView.Adapter<ToDoNotesAdapter.NotesViewHolder>()
             noteDate.text = itemNoteViewModel.dataModel.date
             noteTitle.text = itemNoteViewModel.dataModel.title
         }
+
 
     }
 

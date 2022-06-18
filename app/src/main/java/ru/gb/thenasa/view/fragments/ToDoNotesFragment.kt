@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.gb.thenasa.databinding.FragmentToDoNotesBinding
+import ru.gb.thenasa.view.adapters.ItemTouchHelperCallback
 import ru.gb.thenasa.view.adapters.ToDoNotesAdapter
 import ru.gb.thenasa.view.callbacks.SetEditNoteFragmentCallback
 import ru.gb.thenasa.viewmodel.ToDoNotesViewModel
@@ -20,14 +22,14 @@ class ToDoNotesFragment : Fragment(), ToDoNotesAdapter.OnItemClickListener {
     var binding: FragmentToDoNotesBinding? = null
     val _binding: FragmentToDoNotesBinding get() = binding!!
     lateinit var callback: SetEditNoteFragmentCallback
-    val observer: Observer<List<ItemViewModel>> by lazy {
-        Observer<List<ItemViewModel>> { x -> render(x) }
+    val observer: Observer<MutableList<ItemViewModel>> by lazy {
+        Observer<MutableList<ItemViewModel>> { x -> render(x) }
     }
     val viewModel: ToDoNotesViewModel by lazy {
         ViewModelProvider(requireActivity()).get(ToDoNotesViewModel::class.java)
     }
 
-    private fun render(x: List<ItemViewModel>) {
+    private fun render(x: MutableList<ItemViewModel>) {
         _adapter.setOnClickListener(this)
         _adapter.setData(x)
         binding!!.toDoNotesRecyclerView.adapter = _adapter
@@ -60,6 +62,8 @@ class ToDoNotesFragment : Fragment(), ToDoNotesAdapter.OnItemClickListener {
             )
             adapter = _adapter
         }
+        ItemTouchHelper(ItemTouchHelperCallback({_adapter.itemRemoved(it)}))
+            .attachToRecyclerView(_binding.toDoNotesRecyclerView)
     }
 
     override fun onItemClick(_id: Int) {
