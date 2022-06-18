@@ -1,6 +1,10 @@
 package ru.gb.thenasa.view.fragments
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.BulletSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +49,14 @@ class ApodViewPagerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.apodTitle.apply {
+            val span = SpannableString(text)
+            span.setSpan(
+                BulletSpan(40, Color.WHITE),
+                0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+            text = span
+            Log.e("span", span.length.toString())
+        }
         binding.apodTitle.setOnClickListener {
             if (isExpanded) showApodDescription() else
                 hideApodDescription()

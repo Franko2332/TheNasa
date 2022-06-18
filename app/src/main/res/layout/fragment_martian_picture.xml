@@ -26,7 +26,6 @@
             android:scaleType="centerCrop" />
     </FrameLayout>
     <TextView
-        android:fontFamily="@font/roboto_condensed_bold"
         android:layout_marginStart="@dimen/default_margin"
         android:textSize="@dimen/title_text_size"
         android:id="@+id/martian_fragment_date_text_view"

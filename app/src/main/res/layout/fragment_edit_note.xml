@@ -17,13 +17,11 @@
         android:id="@+id/edit_note_fragment_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_condensed_bold"
         android:textSize="@dimen/title_text_size" />
     <EditText
         android:gravity="top"
         android:id="@+id/edit__note_fragment_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@font/roboto_condensed_bold"
         android:textSize="20sp" />
 </LinearLayout>
