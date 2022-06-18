@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_martian_picture.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_to_do_notes.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_to_do_note.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_to_do_note.xml" value="0.2074468085106383" />
         <entry key="app/src/main/res/layout/item_view_pager_apod.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/item_view_pager_apod_end.xml" value="0.1" />
         <entry key="app/src/main/res/layout/main_fragment_apod_end.xml" value="0.129981884057971" />
