@@ -1,10 +1,6 @@
 package ru.gb.thenasa.view.fragments
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.BulletSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +21,6 @@ import ru.gb.thenasa.model.appstates.PictureOfTheDayState
 import ru.gb.thenasa.viewmodel.PictureOfTheDayViewModel
 
 class ApodViewPagerFragment : Fragment() {
-    private var gapWidthPx: Int = 10
     private var isExpanded = true
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this)[PictureOfTheDayViewModel::class.java]
@@ -50,13 +45,6 @@ class ApodViewPagerFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.apodTitle.apply {
-            val span = SpannableString(text)
-            span.setSpan(BulletSpan(40, Color.WHITE),
-                0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-            text = span
-            Log.e("span", span.length.toString())
-        }
         binding.apodTitle.setOnClickListener {
             if (isExpanded) showApodDescription() else
                 hideApodDescription()
