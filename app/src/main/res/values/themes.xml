@@ -5,6 +5,7 @@
         <item name="activityBackgroundColor">@color/default_first</item>
         <item name="actionBarBackgroundColor">@color/default_app_bar</item>
         <item name="bottomNavigationBackgroundColor">@color/default_second</item>
+        <!-- Splash -->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -60,6 +61,20 @@
         <item name="fontFamily">@font/roboto_condensed_bold</item>
         <item name="android:fontFamily">@font/roboto_condensed_bold</item>
         <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_img</item>
+        <!-- Required for animated icons -->
+        <!--<item name="windowSplashScreenAnimationDuration">200</item>-->
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.TheNasa</item>
     </style>
 
 </resources>

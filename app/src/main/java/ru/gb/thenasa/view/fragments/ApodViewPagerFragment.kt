@@ -55,7 +55,6 @@ class ApodViewPagerFragment : Fragment() {
                 BulletSpan(40, Color.WHITE),
                 0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
             text = span
-            Log.e("span", span.length.toString())
         }
         binding.apodTitle.setOnClickListener {
             if (isExpanded) showApodDescription() else
